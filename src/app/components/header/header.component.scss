@@ -1,5 +1,3 @@
-@import "~bootstrap/scss/bootstrap";
-
 .navbar-expand {
   @each $breakpoint in map-keys($grid-breakpoints) {
     $next: breakpoint-next($breakpoint, $grid-breakpoints);
