@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class SerachService {
-  apiUrl: string = 'http://localhost:3000/users';
+  apiUrl: string = 'https://json-server--3000.local.webcontainer.io/users';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   private username: string;
   private clientid = 'f9930bac8603e3706094';
