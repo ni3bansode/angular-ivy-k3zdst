@@ -1,26 +1,36 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SerachService {
   apiUrl: string = 'https://json-server--3000.local.webcontainer.io/users';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   private username: string;
-  private clientid = 'f9930bac8603e3706094';
-  private clientsecret = 'babc0983c29af36207a67d1b70da8f1f1e636c30';
+  private clientid = '';
+  private clientsecret = '';
 
   constructor(private http: HttpClient) {
-    this.username = "";
+    this.username = '';
     this.username = 'ni3bansode';
-
   }
 
   getProfileInfo() {
-    return this.http.get("https://api.github.com/users/" + this.username + "?client_id=" + this.clientid + "&client_secret=" + this.clientsecret)
+    return this.http.get(
+      'https://api.github.com/users/' +
+        this.username +
+        '?client_id=' +
+        this.clientid +
+        '&client_secret=' +
+        this.clientsecret
+    );
   }
 
   updateProfile(username: string) {
@@ -31,27 +41,20 @@ export class SerachService {
   }
   delete(id: any): Observable<any> {
     var API_URL = `${this.apiUrl}/${id}`;
-    return this.http.delete(API_URL).pipe(
-      catchError(this.handleError)
-    )
+    return this.http.delete(API_URL).pipe(catchError(this.handleError));
   }
   create(data: any): Observable<any> {
     let API_URL = `${this.apiUrl}`;
-    return this.http.post(API_URL, data)
-      .pipe(
-        catchError(this.handleError)
-      )
+    return this.http.post(API_URL, data).pipe(catchError(this.handleError));
   }
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);
     } else {
       console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
+      );
     }
-    return throwError(
-      'Something bad happened; please try again later.');
-  };
-
+    return throwError('Something bad happened; please try again later.');
+  }
 }
